@@ -13,24 +13,28 @@ const ME_QUERY = gql`
     }
   }
 `;
-const MenuItems = ({ children }) => (
-  <Text mt={{ base: 4, md: 0 }} mr={7} display="block">
-    {children}
-  </Text>
-);
+
+// const MenuItems = ({ children }) => (
+//   <Text mt={{ base: 4, md: 0 }} mr={7} display="block">
+//     {children}
+//   </Text>
+// );
+
 const Header = (props) => {
   const [show, setShow] = React.useState(false);
   const handleToggle = () => setShow(!show);
 
   return (
     <Flex
+      zIndex="300"
+      boxShadow="md"
       as="nav"
       align="center"
       justify="space-between"
       wrap="wrap"
       padding="1.5rem"
-      bg="aliceblue"
-      color="black"
+      bg="blackAlpha.900"
+      color="white"
       {...props}
     >
       <Flex align="center" mr={5}>
@@ -41,8 +45,8 @@ const Header = (props) => {
 
       <Box display={{ base: "block", md: "none" }} onClick={handleToggle}>
         <svg
-          fill="black"
-          width="12px"
+          fill="white"
+          width="14px"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -50,29 +54,25 @@ const Header = (props) => {
           <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
         </svg>
       </Box>
-
       <Box
         ml="10"
         display={{ sm: show ? "block" : "none", md: "flex" }}
         width={{ sm: "full", md: "auto" }}
         alignItems="center"
         flexGrow={1}
-      >
-        <MenuItems>Examples</MenuItems>
-        <MenuItems>Blog</MenuItems>
-      </Box>
+      ></Box>
 
       <Box
         display={{ sm: show ? "block" : "none", md: "block" }}
         mt={{ base: 4, md: 0 }}
       >
         <Link to="/signup">
-          <Button colorScheme="linkedin" border="1px" ml="4">
+          <Button colorScheme="orange" variant="solid" ml="4">
             Sign up
           </Button>
         </Link>
         <Link to="/login">
-          <Button colorScheme="facebook" border="1px" ml="4">
+          <Button colorScheme="twitter" variant="solid" ml="4">
             Login
           </Button>
         </Link>

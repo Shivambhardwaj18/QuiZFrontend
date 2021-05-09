@@ -12,6 +12,7 @@ import Header from "./components/Header";
 import LoginPage from "./pages/LoginPage";
 import QPage from "./pages/QPage";
 import StudentSignup from "./pages/StudentSignup";
+import Footer from "./components/Footer";
 function App() {
   const token = window.localStorage.getItem("qid");
 
@@ -23,16 +24,13 @@ function App() {
   if (uid || token) {
     routes = (
       <>
-        <Switch>
-          <Redirect to="/" exact />
-        </Switch>
+        <Redirect to="/" exact />
       </>
     );
   } else {
     routes = (
       <Switch>
         <Route path="/" component={HomePage} exact />
-
         <Route path="/signup/teacher" component={RegisterPage} />
         <Route path="/signup/student" component={StudentSignup} />
         <Route path="/signup" component={QPage} />
@@ -51,6 +49,7 @@ function App() {
         <Router>
           <Header />
           {routes}
+          <Footer />
         </Router>
       </authContext.Provider>
     </>
