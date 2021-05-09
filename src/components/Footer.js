@@ -25,6 +25,7 @@ const SocialMediaLinks = (props) => (
 );
 const Footer = () => (
   <Box
+    mt="10"
     as="footer"
     role="contentinfo"
     mx="auto"
