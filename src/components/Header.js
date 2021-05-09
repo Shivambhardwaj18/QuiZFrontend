@@ -14,7 +14,7 @@ const ME_QUERY = gql`
   }
 `;
 const MenuItems = ({ children }) => (
-  <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
+  <Text mt={{ base: 4, md: 0 }} mr={7} display="block">
     {children}
   </Text>
 );
@@ -52,12 +52,12 @@ const Header = (props) => {
       </Box>
 
       <Box
+        ml="10"
         display={{ sm: show ? "block" : "none", md: "flex" }}
         width={{ sm: "full", md: "auto" }}
         alignItems="center"
         flexGrow={1}
       >
-        <MenuItems>Docs</MenuItems>
         <MenuItems>Examples</MenuItems>
         <MenuItems>Blog</MenuItems>
       </Box>
@@ -71,10 +71,11 @@ const Header = (props) => {
             Sign up
           </Button>
         </Link>
-
-        <Button colorScheme="facebook" border="1px" ml="4">
-          Login
-        </Button>
+        <Link to="/login/teacher">
+          <Button colorScheme="facebook" border="1px" ml="4">
+            Login
+          </Button>
+        </Link>
       </Box>
     </Flex>
   );
