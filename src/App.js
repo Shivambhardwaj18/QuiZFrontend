@@ -1,4 +1,3 @@
-import { Heading } from "@chakra-ui/layout";
 import React, { useState } from "react";
 import {
   BrowserRouter as Router,
@@ -9,6 +8,7 @@ import {
 import RegisterPage from "./pages/RegisterPage";
 import { authContext } from "./context/authContext";
 import HomePage from "./pages/HomePage";
+import Header from "./components/Header";
 function App() {
   const token = window.localStorage.getItem("qid");
 
@@ -21,8 +21,7 @@ function App() {
     routes = (
       <>
         <Switch>
-          <Route path="/" component={HomePage} />
-          <Redirect to="/" />
+          <Route path="/" component={HomePage} exact />
         </Switch>
       </>
     );
@@ -30,7 +29,6 @@ function App() {
     routes = (
       <Switch>
         <Route path="/signup/teacher" component={RegisterPage} />
-        <Redirect to="/signup/teacher" />
       </Switch>
     );
   }
@@ -45,7 +43,7 @@ function App() {
         }}
       >
         <Router>
-          <Heading>Header</Heading>
+          <Header />
           {routes}
         </Router>
       </authContext.Provider>

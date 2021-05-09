@@ -67,7 +67,7 @@ const RegisterPage = ({ history }) => {
             <Button
               mt={4}
               type="submit"
-              colorScheme="teal"
+              colorScheme="telegram"
               isLoading={isSubmitting}
             >
               Register
