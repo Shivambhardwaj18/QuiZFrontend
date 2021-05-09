@@ -33,7 +33,7 @@ const RegisterPage = ({ history }) => {
   return (
     <Wrapper variant="small">
       <Text mb="5" align="center" isTruncated fontSize="3xl">
-        Teacher Login
+        Login
       </Text>
       <Formik
         initialValues={{ email: "", password: "" }}

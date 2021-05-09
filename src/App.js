@@ -10,6 +10,8 @@ import { authContext } from "./context/authContext";
 import HomePage from "./pages/HomePage";
 import Header from "./components/Header";
 import LoginPage from "./pages/LoginPage";
+import QPage from "./pages/QPage";
+import StudentSignup from "./pages/StudentSignup";
 function App() {
   const token = window.localStorage.getItem("qid");
 
@@ -22,7 +24,6 @@ function App() {
     routes = (
       <>
         <Switch>
-          <Route path="/" component={HomePage} exact />
           <Redirect to="/" exact />
         </Switch>
       </>
@@ -30,13 +31,15 @@ function App() {
   } else {
     routes = (
       <Switch>
+        <Route path="/" component={HomePage} exact />
+
         <Route path="/signup/teacher" component={RegisterPage} />
-        <Route path="/login/teacher" component={LoginPage} />
+        <Route path="/signup/student" component={StudentSignup} />
+        <Route path="/signup" component={QPage} />
+        <Route path="/login" component={LoginPage} />
       </Switch>
     );
   }
-  console.log(uid);
-  console.log(routes);
   return (
     <>
       <authContext.Provider

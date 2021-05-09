@@ -35,7 +35,7 @@ const Header = (props) => {
     >
       <Flex align="center" mr={5}>
         <Heading as="h1" size="xl" letterSpacing={"-.1rem"}>
-          DoQuiz
+          <Link to="/">DoQuiz</Link>
         </Heading>
       </Flex>
 
@@ -66,12 +66,12 @@ const Header = (props) => {
         display={{ sm: show ? "block" : "none", md: "block" }}
         mt={{ base: 4, md: 0 }}
       >
-        <Link to="/signup/teacher">
+        <Link to="/signup">
           <Button colorScheme="linkedin" border="1px" ml="4">
             Sign up
           </Button>
         </Link>
-        <Link to="/login/teacher">
+        <Link to="/login">
           <Button colorScheme="facebook" border="1px" ml="4">
             Login
           </Button>
