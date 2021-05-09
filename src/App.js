@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import RegisterPage from "./pages/RegisterPage";
 import { authContext } from "./context/authContext";
 import HomePage from "./pages/HomePage";
@@ -18,6 +23,7 @@ function App() {
       <>
         <Switch>
           <Route path="/" component={HomePage} exact />
+          <Redirect to="/" exact />
         </Switch>
       </>
     );

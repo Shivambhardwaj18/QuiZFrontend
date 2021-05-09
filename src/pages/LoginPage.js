@@ -36,7 +36,7 @@ const RegisterPage = ({ history }) => {
         Teacher Login
       </Text>
       <Formik
-        initialValues={{ name: "", email: "", password: "" }}
+        initialValues={{ email: "", password: "" }}
         onSubmit={async (values, { setErrors }) => {
           const response = await login({
             variables: {
@@ -45,8 +45,8 @@ const RegisterPage = ({ history }) => {
             },
           });
           if (!response.errors) {
-            window.localStorage.setItem("qid", response.data.signup.token);
-            auth.login(response.data.signup.user.id);
+            window.localStorage.setItem("qid", response.data.login.token);
+            auth.login(response.data.login.user.id);
             history.push("/");
           }
         }}
