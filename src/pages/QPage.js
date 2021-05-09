@@ -1,7 +1,6 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Flex, Text } from "@chakra-ui/layout";
 import React from "react";
-import { Link } from "react-router-dom";
 import Wrapper from "../components/Wrapper";
 
 const QPage = ({ history }) => {
@@ -11,7 +10,7 @@ const QPage = ({ history }) => {
         <Text textAlign="center" fontSize="4xl" mb="9">
           Create a FREE Account
         </Text>
-        <Box maxW="2xl">
+        <Box maxW="2xl" height="90vh">
           <Flex flexDirection="column" justifyContent="center">
             <Button
               mb="3"

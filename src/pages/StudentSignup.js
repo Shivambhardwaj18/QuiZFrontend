@@ -8,7 +8,7 @@ import Wrapper from "../components/Wrapper";
 const StudentSignup = () => {
   return (
     <>
-      <Box mt="50">
+      <Box mt="50" height="60vh">
         <Wrapper variant="small">
           <Text fontSize="4xl" textAlign="center">
             Student Sign Up
