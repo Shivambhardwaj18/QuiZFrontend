@@ -1,10 +1,11 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Text } from "@chakra-ui/layout";
 import { Form, Formik } from "formik";
-import React from "react";
+import React, { useContext } from "react";
 import { gql, useMutation } from "@apollo/client";
 import InputField from "../components/InputField";
 import Wrapper from "../components/Wrapper";
+import { authContext } from "../context/authContext";
 
 const SIGNUP_TEACHER = gql`
   mutation signup($name: String!, $email: String!, $password: String!) {
@@ -19,6 +20,7 @@ const SIGNUP_TEACHER = gql`
   }
 `;
 const RegisterPage = ({ history }) => {
+  const auth = useContext(authContext);
   const [signup, payload] = useMutation(SIGNUP_TEACHER);
   if (payload.error) {
     return (
@@ -44,6 +46,8 @@ const RegisterPage = ({ history }) => {
           });
           if (!response.errors) {
             window.localStorage.setItem("qid", response.data.signup.token);
+            auth.login(response.data.signup.user.id);
+            console.log(response.data.signup.user.id);
             history.push("/");
           }
         }}
