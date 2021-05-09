@@ -1,24 +1,56 @@
 import { Button } from "@chakra-ui/button";
-import { Box, Heading, Text } from "@chakra-ui/layout";
+import { Box, Text } from "@chakra-ui/layout";
 import { Form, Formik } from "formik";
 import React from "react";
+import { gql, useMutation } from "@apollo/client";
 import InputField from "../components/InputField";
 import Wrapper from "../components/Wrapper";
 
-const RegisterPage = () => {
+const SIGNUP_TEACHER = gql`
+  mutation signup($name: String!, $email: String!, $password: String!) {
+    signup(name: $name, email: $email, password: $password) {
+      user {
+        id
+        name
+        email
+      }
+      token
+    }
+  }
+`;
+const RegisterPage = ({ history }) => {
+  const [signup, payload] = useMutation(SIGNUP_TEACHER);
+  if (payload.error) {
+    return (
+      <>
+        <Text>Error</Text>
+      </>
+    );
+  }
   return (
     <Wrapper variant="small">
       <Text mb="5" align="center" isTruncated fontSize="3xl">
         Teacher Sign Up
       </Text>
       <Formik
-        initialValues={{ email: "", password: "" }}
-        onSubmit={async (values) => {
-          console.log(values);
+        initialValues={{ name: "", email: "", password: "" }}
+        onSubmit={async (values, { setErrors }) => {
+          const response = await signup({
+            variables: {
+              name: values.name,
+              email: values.email,
+              password: values.password,
+            },
+          });
+          if (!response.errors) {
+            window.localStorage.setItem("qid", response.data.signup.token);
+            history.push("/");
+          }
         }}
       >
         {({ isSubmitting }) => (
           <Form>
+            <InputField name="name" placeholder="Name" label="Name" />
             <InputField name="email" placeholder="Email" label="Email" />
             <Box mt="4">
               <InputField
