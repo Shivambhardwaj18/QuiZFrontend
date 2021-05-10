@@ -8,6 +8,7 @@ import {
 import RegisterPage from "./pages/RegisterPage";
 import { authContext } from "./context/authContext";
 import HomePage from "./pages/HomePage";
+import "./index.css";
 import Header from "./components/Header";
 import LoginPage from "./pages/LoginPage";
 import QPage from "./pages/QPage";
@@ -28,6 +29,7 @@ function App() {
 
   let routes;
   if (uid || token) {
+    console.log(uid, token);
     routes = (
       <>
         <Route path="/teacher/:name" component={TeacherScreen} />

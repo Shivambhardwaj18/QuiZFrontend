@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { FcPlus } from "react-icons/fc";
 import gql from "graphql-tag";
 import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { authContext } from "../context/authContext";
 
 const ME_QUERY = gql`
@@ -23,11 +23,13 @@ const Header = (props) => {
   const auth = useContext(authContext);
   const [show, setShow] = React.useState(false);
   const handleToggle = () => setShow(!show);
+  console.log(props);
   const { error, loading, data } = useQuery(ME_QUERY);
   let isLoggedIn = false;
   if (localStorage.getItem("qid")) {
     isLoggedIn = true;
   }
+  const handleCreate = () => {};
   return (
     <Flex
       zIndex="300"
@@ -46,7 +48,6 @@ const Header = (props) => {
           <Link to="/">DoQuiz</Link>
         </Heading>
       </Flex>
-
       <Box display={{ base: "block", md: "none" }} onClick={handleToggle}>
         <svg
           fill="white"
@@ -76,8 +77,13 @@ const Header = (props) => {
               alignItems="center"
               justifyContent="space-around"
             >
-              <Button variant="solid" colorScheme="whiteAlpha" mr="3">
-                <FcPlus /> <Text ml="3">Create Subject</Text>
+              <Button
+                variant="solid"
+                colorScheme="whiteAlpha"
+                mr="3"
+                onClick={handleCreate}
+              >
+                <i class="fas fa-plus"></i> <Text ml="3">Create Subject</Text>
               </Button>
               <Button
                 colorScheme="red"
