@@ -1,12 +1,15 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Flex, Heading, Text } from "@chakra-ui/layout";
+import { useQuery } from "@apollo/client";
+import { FcPlus } from "react-icons/fc";
 import gql from "graphql-tag";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { authContext } from "../context/authContext";
 
 const ME_QUERY = gql`
-  query me {
-    user {
+  query {
+    me {
       id
       name
       email
@@ -14,16 +17,17 @@ const ME_QUERY = gql`
   }
 `;
 
-// const MenuItems = ({ children }) => (
-//   <Text mt={{ base: 4, md: 0 }} mr={7} display="block">
-//     {children}
-//   </Text>
-// );
+console.log(window.localStorage.getItem("qid"));
 
 const Header = (props) => {
+  const auth = useContext(authContext);
   const [show, setShow] = React.useState(false);
   const handleToggle = () => setShow(!show);
-
+  const { error, loading, data } = useQuery(ME_QUERY);
+  let isLoggedIn = false;
+  if (localStorage.getItem("qid")) {
+    isLoggedIn = true;
+  }
   return (
     <Flex
       zIndex="300"
@@ -61,22 +65,50 @@ const Header = (props) => {
         alignItems="center"
         flexGrow={1}
       ></Box>
-
-      <Box
-        display={{ sm: show ? "block" : "none", md: "block" }}
-        mt={{ base: 4, md: 0 }}
-      >
-        <Link to="/signup">
-          <Button colorScheme="orange" variant="solid" ml="4">
-            Sign up
-          </Button>
-        </Link>
-        <Link to="/login">
-          <Button colorScheme="twitter" variant="solid" ml="4">
-            Login
-          </Button>
-        </Link>
-      </Box>
+      {isLoggedIn ? (
+        <>
+          <Box
+            display={{ sm: show ? "block" : "none", md: "block" }}
+            mt={{ base: 4, md: 0 }}
+          >
+            <Flex
+              flexDirection="row"
+              alignItems="center"
+              justifyContent="space-around"
+            >
+              <Button variant="solid" colorScheme="whiteAlpha" mr="3">
+                <FcPlus /> <Text ml="3">Create Subject</Text>
+              </Button>
+              <Button
+                colorScheme="red"
+                onClick={() => {
+                  auth.logout();
+                }}
+              >
+                Logout
+              </Button>
+            </Flex>
+          </Box>
+        </>
+      ) : (
+        <>
+          <Box
+            display={{ sm: show ? "block" : "none", md: "block" }}
+            mt={{ base: 4, md: 0 }}
+          >
+            <Link to="/signup">
+              <Button colorScheme="orange" variant="solid" ml="4">
+                Sign up
+              </Button>
+            </Link>
+            <Link to="/login">
+              <Button colorScheme="twitter" variant="solid" ml="4">
+                Login
+              </Button>
+            </Link>
+          </Box>
+        </>
+      )}
     </Flex>
   );
 };

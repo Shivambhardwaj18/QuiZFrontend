@@ -13,6 +13,7 @@ import LoginPage from "./pages/LoginPage";
 import QPage from "./pages/QPage";
 import StudentSignup from "./pages/StudentSignup";
 import Footer from "./components/Footer";
+import TeacherScreen from "./pages/TeacherScreen";
 function App() {
   const token = window.localStorage.getItem("qid");
 
@@ -20,11 +21,16 @@ function App() {
   const userLogin = (id) => {
     setUid(id);
   };
+  const userLogout = () => {
+    setUid(null);
+    localStorage.removeItem("qid");
+  };
+
   let routes;
   if (uid || token) {
     routes = (
       <>
-        <Redirect to="/" exact />
+        <Route path="/teacher/:name" component={TeacherScreen} />
       </>
     );
   } else {
@@ -44,6 +50,7 @@ function App() {
         value={{
           id: uid,
           login: userLogin,
+          logout: userLogout,
         }}
       >
         <Router>

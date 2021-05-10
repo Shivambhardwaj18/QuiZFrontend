@@ -47,7 +47,7 @@ const RegisterPage = ({ history }) => {
           if (!response.errors) {
             window.localStorage.setItem("qid", response.data.login.token);
             auth.login(response.data.login.user.id);
-            history.push("/");
+            history.push(`/teacher/@${response.data.login.user.name}`);
           }
         }}
       >

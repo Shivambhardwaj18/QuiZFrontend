@@ -7,7 +7,6 @@ import FeatureWrapper from "../components/FeatureWrapper";
 
 const HomePage = ({ history }) => {
   const [isLessThan1000] = useMediaQuery("(max-width: 1000px)");
-  console.log(isLessThan1000);
   return (
     <>
       <Box
