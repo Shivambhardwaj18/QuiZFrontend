@@ -48,7 +48,7 @@ const RegisterPage = ({ history }) => {
             window.localStorage.setItem("qid", response.data.signup.token);
             auth.login(response.data.signup.user.id);
             console.log(response.data.signup.user.id);
-            history.push(`/teacher/@${response.data.signup.user.name}`);
+            history.push(`/me`);
           }
         }}
       >

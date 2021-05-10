@@ -6,6 +6,11 @@ import React from "react";
 import FeatureWrapper from "../components/FeatureWrapper";
 
 const HomePage = ({ history }) => {
+  let isLoggedIn = false;
+  if (localStorage.getItem("qid")) {
+    isLoggedIn = true;
+  }
+
   const [isLessThan1000] = useMediaQuery("(max-width: 1000px)");
   return (
     <>
@@ -30,14 +35,16 @@ const HomePage = ({ history }) => {
             Long-term growth.
           </Text>
           <Box alignSelf="flex-start" mt="8">
-            <Button
-              ml={isLessThan1000 ? "10" : "0"}
-              size="lg"
-              colorScheme="twitter"
-              onClick={() => history.push("/signup/teacher")}
-            >
-              Teachers,Sign Up for FREE
-            </Button>
+            {!isLoggedIn && (
+              <Button
+                ml={isLessThan1000 ? "10" : "0"}
+                size="lg"
+                colorScheme="twitter"
+                onClick={() => history.push("/signup/teacher")}
+              >
+                Teachers,Sign Up for FREE
+              </Button>
+            )}
           </Box>
         </Flex>
         <Flex>

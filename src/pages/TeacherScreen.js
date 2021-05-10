@@ -34,21 +34,25 @@ const DELETE_MUT = gql`
     deleteSubject(name: $name)
   }
 `;
+
 const TeacherScreen = (props) => {
-  let teacherName = props.match.params.name.replace("@", "");
   const { error, loading, data } = useQuery(ME_QUERY);
   const [subjects, setSubjects] = useState([]);
   const [deleteSubject, payload] = useMutation(DELETE_MUT);
+  const popSubject = (n) => {
+    let poped = subjects.filter((x) => x.name !== n);
+    setSubjects(poped);
+  };
   const main = useCallback(() => {
     if (!loading) {
       setSubjects(data.me.subjects);
     }
-  }, [data, loading]);
+  }, [data, loading, subjects]);
 
   console.log(data);
   useEffect(() => {
     main();
-  }, [loading, data]);
+  }, [loading, data, main]);
 
   const handleDeleteSubject = (name) => {
     Swal.fire({
@@ -63,19 +67,20 @@ const TeacherScreen = (props) => {
       if (result.isConfirmed) {
         // do deletion here
         deleteSubject({ variables: { name } });
+        popSubject(name);
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
     });
   };
   return (
     <>
-      <Box height="65vh">
+      <Box>
         {loading ? (
           <div className="spinner">
             <Spinner size="xl" />
           </div>
         ) : (
-          <Box height="65vh" display="flex" width="100%" mt="30px" p="20px">
+          <Box display="flex" width="100%" mt="30px" p="20px" mb="40px">
             <Table variant="striped" ml="40px" mr="40px">
               <TableCaption>Subjects Created by You</TableCaption>
               <Thead>

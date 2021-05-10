@@ -25,11 +25,13 @@ const SocialMediaLinks = (props) => (
 );
 const Footer = () => (
   <Box
-    mt="10"
     as="footer"
     role="contentinfo"
-    mx="auto"
-    maxW="7xl"
+    position="fixed"
+    left="0"
+    bottom="0"
+    width="100%"
+    height="6vh"
     py="12"
     bg="black"
     color="whiteAlpha.800"

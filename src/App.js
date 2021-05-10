@@ -15,6 +15,7 @@ import QPage from "./pages/QPage";
 import StudentSignup from "./pages/StudentSignup";
 import Footer from "./components/Footer";
 import TeacherScreen from "./pages/TeacherScreen";
+import CreateSubjectScreen from "./pages/CreateSubjectScreen";
 function App() {
   const token = window.localStorage.getItem("qid");
 
@@ -32,7 +33,10 @@ function App() {
     console.log(uid, token);
     routes = (
       <>
-        <Route path="/teacher/:name" component={TeacherScreen} />
+        <Route path="/" component={HomePage} exact />
+
+        <Route path="/me" component={TeacherScreen} />
+        <Route path="/create" component={CreateSubjectScreen} />
       </>
     );
   } else {
