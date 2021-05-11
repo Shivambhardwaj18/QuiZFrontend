@@ -1,15 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-  HttpLink,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { ChakraProvider, ColorModeProvider, theme } from "@chakra-ui/react";
-import { setContext } from "@apollo/client/link/context";
 import App from "./App";
 
 const client = new ApolloClient({

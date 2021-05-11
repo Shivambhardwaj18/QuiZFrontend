@@ -1,12 +1,10 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Text } from "@chakra-ui/layout";
 import { Form, Formik } from "formik";
-import React, { useContext } from "react";
+import React from "react";
 import { gql, useMutation } from "@apollo/client";
 import InputField from "../components/InputField";
 import Wrapper from "../components/Wrapper";
-import { authContext } from "../context/authContext";
-import { subs } from "./TeacherScreen";
 
 const CREATE_MUT = gql`
   mutation addSubject($name: String!) {
@@ -19,7 +17,7 @@ const CREATE_MUT = gql`
   }
 `;
 const CreateSubjectScreen = ({ history }) => {
-  const auth = useContext(authContext);
+  // const auth = useContext(authContext);
   const [addSubject, payload] = useMutation(CREATE_MUT);
   if (payload.error) {
     return (

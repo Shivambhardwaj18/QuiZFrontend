@@ -1,9 +1,6 @@
 import { Button } from "@chakra-ui/button";
 import { Box, Flex, Heading, Text } from "@chakra-ui/layout";
-import { useQuery } from "@apollo/client";
-import { FcPlus } from "react-icons/fc";
-import gql from "graphql-tag";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { authContext } from "../context/authContext";
 

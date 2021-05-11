@@ -1,7 +1,7 @@
 import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 import * as React from "react";
 import { ButtonGroup, IconButton } from "@chakra-ui/react";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 const Copyright = (props) => (
   <Text fontSize="sm" {...props}>
     &copy; {new Date().getFullYear()} DoQuiz, Inc. All rights reserved.

@@ -1,12 +1,11 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Box, Heading } from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/layout";
 import Swal from "sweetalert2";
 import {
   Table,
   TableCaption,
   Tbody,
   Td,
-  Tfoot,
   Th,
   Thead,
   Tr,
@@ -36,9 +35,9 @@ const DELETE_MUT = gql`
 `;
 
 const TeacherScreen = (props) => {
-  const { error, loading, data } = useQuery(ME_QUERY);
+  const { loading, data } = useQuery(ME_QUERY);
   const [subjects, setSubjects] = useState([]);
-  const [deleteSubject, payload] = useMutation(DELETE_MUT);
+  const [deleteSubject] = useMutation(DELETE_MUT);
   const popSubject = (n) => {
     let poped = subjects.filter((x) => x.name !== n);
     setSubjects(poped);
@@ -47,7 +46,7 @@ const TeacherScreen = (props) => {
     if (!loading) {
       setSubjects(data.me.subjects);
     }
-  }, [data, loading, subjects]);
+  }, [data, loading]);
 
   console.log(data);
   useEffect(() => {
