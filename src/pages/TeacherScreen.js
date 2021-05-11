@@ -11,9 +11,10 @@ import {
   Tr,
 } from "@chakra-ui/table";
 import gql from "graphql-tag";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Button } from "@chakra-ui/button";
 import { Spinner } from "@chakra-ui/spinner";
+import { authContext } from "../context/authContext";
 
 const ME_QUERY = gql`
   query {
@@ -36,22 +37,17 @@ const DELETE_MUT = gql`
 
 const TeacherScreen = (props) => {
   const { loading, data } = useQuery(ME_QUERY);
-  const [subjects, setSubjects] = useState([]);
   const [deleteSubject] = useMutation(DELETE_MUT);
+  const auth = useContext(authContext);
   const popSubject = (n) => {
-    let poped = subjects.filter((x) => x.name !== n);
-    setSubjects(poped);
+    let poped = auth.subjects.filter((x) => x.name !== n);
+    auth.setSubjectsAll(poped);
   };
-  const main = useCallback(() => {
-    if (!loading) {
-      setSubjects(data.me.subjects);
-    }
-  }, [data, loading]);
-
   console.log(data);
-  useEffect(() => {
-    main();
-  }, [loading, data, main]);
+
+  if (!loading) {
+    auth.setSubjectsAll(data.me.subjects);
+  }
 
   const handleDeleteSubject = (name) => {
     Swal.fire({
@@ -90,7 +86,7 @@ const TeacherScreen = (props) => {
                 </Tr>
               </Thead>
               <Tbody>
-                {subjects.map((subject, i) => {
+                {auth.subjects.map((subject, i) => {
                   return (
                     <>
                       <Tr key={i}>

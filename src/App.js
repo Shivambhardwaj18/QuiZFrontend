@@ -15,6 +15,7 @@ function App() {
   const token = window.localStorage.getItem("qid");
 
   const [uid, setUid] = useState();
+  const [subjects, setSubjects] = useState([]);
   const userLogin = (id) => {
     setUid(id);
   };
@@ -23,9 +24,12 @@ function App() {
     localStorage.removeItem("qid");
   };
 
+  const setSubjectsAll = (s) => {
+    setSubjects(s);
+  };
+
   let routes;
   if (uid || token) {
-    console.log(uid, token);
     routes = (
       <>
         <Route path="/" component={HomePage} exact />
@@ -52,6 +56,8 @@ function App() {
           id: uid,
           login: userLogin,
           logout: userLogout,
+          subjects,
+          setSubjectsAll,
         }}
       >
         <Router>
